@@ -77,3 +77,12 @@ group by dept;
 
 SELECT SUM(salary) AS total_salary
 FROM employees;
+
+select count(*) from employees;
+
+--department wise avg salary
+
+select dept,avg(salary) as Average_salary from employees
+group by dept;
+
+
