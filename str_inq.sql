@@ -36,6 +36,11 @@ select distinct(dept) from employees;
 select * from employees
 where fname like('_m%');
 
+
+select emp_id,fname,lname,salary from employees
+where salary = (select min(salary) from employees);
+
+
 select * from employees
 where length(fname)>5;
 
@@ -49,3 +54,4 @@ group by dept;
 
 select emp_id ,fname,lname,salary from employees
 where salary = (select min(salary) from employees);
+
