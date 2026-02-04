@@ -85,3 +85,43 @@ where d.dept_id is null;
 select e.emp_name,p.project_name
 from employees e
 cross join projects p;
+--------
+
+create table parents(
+parent_id varchar(10),
+parent_name varchar(50),
+parent_age int
+);
+insert into parents values
+('f4','johnson',36),
+('f5','maryam',40),
+('f6','stewart',70);
+
+select * from parents;
+
+create table children(
+child_id varchar(10),
+child_name varchar(20),
+child_age int,
+parent_id varchar(10)
+);
+insert into children values
+('F1', 'David', 4,  'F5'),
+('F2', 'Carol', 10, 'F5'),
+('F3', 'Michael', 12, 'F5'),
+('F7', 'Rohan', 6,  'F4'),
+('F8', 'Asha', 8,  'F4');
+
+select  * from children;
+
+select c.child_name,p.parent_name
+from children c
+join parents p on c.parent_id = p.parent_id;
+
+SELECT
+    c.child_name,
+    p.parent_name
+FROM children c
+INNER JOIN parents p
+ON c.parent_id = p.parent_id;
+
