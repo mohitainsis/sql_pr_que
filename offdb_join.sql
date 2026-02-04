@@ -49,16 +49,39 @@ INSERT INTO projects VALUES
 
 select * from employees;
 select * from departments;
+select * from managers;
+select * from projects;
 
 select e.emp_name,d.dept_name
 from employees e 
 join departments d on e.dept_id = d.dept_id;
 
 ------------
+select e.emp_name,d.dept_name,m.manager_name
+from employees e
+left join departments d on e.dept_id = d.dept_id
+left join managers m on m.manager_id = e.manager_id;
+----------------
 
+select d.dept_name,p.project_name
+from departments d
+join projects p on d.dept_id = p.dept_id;
+------------------
 
+select e.emp_name,d.dept_name,m.manager_name,p.project_name
+from employees e
+left join departments d on e.dept_id = d.dept_id
+left join  managers m on e.manager_id = m.manager_id
+left join projects p on d.dept_id = p.dept_id;
+----employee who dont belong to any department but still have manager
 
+select e.emp_name,d.dept_name,m.manager_name
+from employees e
+left join departments d on e.dept_id = d.dept_id
+join managers m on e.manager_id = m.manager_id
+where d.dept_id is null;
+------cross join
 
-
-
-
+select e.emp_name,p.project_name
+from employees e
+cross join projects p;
