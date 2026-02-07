@@ -1,3 +1,4 @@
+--total tables(6)
 select * from departments;
 select * from employees;
 select * from managers;
