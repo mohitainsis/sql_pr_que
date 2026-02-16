@@ -83,3 +83,34 @@ select e.name,e.salary,e.dept
 from employees1 e
 join cte c on c.dept=e.dept
 where c.avg_sal <e.salary;
+
+select * 
+from employees1;
+
+select name,salary
+from employees1
+where salary>(select avg(salary)
+from employees1);
+
+with cte as (
+select dept,sum(salary) as total_sal
+from employees1
+group by dept)
+select e.dept
+from employees1 e
+join cte c on e.dept= c.dept
+where c.total_sal>120000;
+
+select max(salary)
+from employees;
+
+select *
+from (
+	select *,avg(salary) over(partition by dept) as dept_avg
+	from employees1)
+where salary>dept_avg;
+
+
+
+
+
