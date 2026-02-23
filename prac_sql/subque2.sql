@@ -117,3 +117,74 @@ where salary <> (select max(salary)
 				from employees);
 
 --multi row subquery---
+
+select *
+from employees;
+select *
+from departments;
+
+select e.emp_id,e.emp_name,d.dept_id
+from departments d
+where dept_id in (select dept_id
+from employees e
+where emp_name = 'Mohan');
+
+/*select *
+from employees e
+where dept_id = (select dept_name
+					from departments d 
+					where dept_id = e.dept_id);*/
+
+select emp_id,emp_name,dept_id
+from employees
+where dept_id = (select dept_id 
+				from employees
+				where emp_name = 'Mohan');
+
+select *
+from employees;
+select *
+from departments;
+
+--departments with more than 3 employees
+select *
+from employees
+where dept_id in (select dept_id
+from employees
+group by dept_id
+having count(*)>=3);
+
+-------------
+select emp_id,emp_name,salary
+from employees
+where salary in (select salary
+from employees
+where dept_id = (select dept_id
+					from departments 
+
+where dept_name = 'HR'));
+select *
+from employees;
+select *
+from departments;
+
+select emp_id,emp_name,salary
+from employees
+where salary > All (select salary
+from employees
+where dept_id = (select dept_id
+				from departments 
+				where dept_name = 'HR'));
+
+/*select emp_id,emp_name,salary,dept_id
+from employees 
+where salary > ANY (select avg(salary)
+from employees e
+join departments d on d.dept_id = e.dept_id
+group by d.dept_id)*/
+
+
+
+
+
+
