@@ -183,6 +183,121 @@ from employees e
 join departments d on d.dept_id = e.dept_id
 group by d.dept_id)*/
 
+--correlated subquery
+
+select emp_id,emp_name,salary,dept_id 
+from employees e1
+where salary> (select avg(salary)
+				from employees e2
+				where e1.dept_id = e2.dept_id)
+order by dept_id asc;
+
+select  emp_id,emp_name,salary,dept_id
+from employees e1
+where salary = (select max(salary)
+				from employees e2
+				where e1.dept_id = e2.dept_id)
+
+select *
+from employees;
+select *
+from departments;
+
+
+select 
+from departments d
+where salary exists(select salary
+		from employees e
+		where )
+
+
+select  *
+from employees e
+where exists (select 1
+				from departments d 
+				where d.dept_id = e.dept_id
+				and d.city = 'Delhi')
+
+select *
+from departments d 
+where exists(select 1
+			from employees e 
+			where d.dept_id = e.dept_id
+			and salary>50000);
+
+select *
+from employees;
+select *
+from orders;
+
+select *
+from employees e1
+where not exists (select bonus
+					from employees e2
+					where e1.emp_id = e2.emp_id
+					and bonus is not null);
+
+select order_id,customer_name,order_date,amount
+from orders o1
+where order_date in (select max(order_date)
+						from orders o2
+						where o1.customer_name = o2.customer_name
+						group by customer_name);
+
+select *
+from employees;
+
+select emp_id,emp_name,salary
+from employees e1
+where salary > any (select salary
+				from employees e2
+				where e1.emp_id = e2.manager_id);
+
+
+select *
+from departments d
+where dept_id  (select max(salary),dept_id
+from employees
+group by dept_id
+order by max(salary) desc);
+
+
+select *
+from employees;
+
+select *
+from departments d
+where dept_id = (select dept_id
+from (
+	select dept_id , avg(salary) as avg_sal
+	from employees e
+	group by dept_id)
+order by avg_sal desc
+limit 1
+);
+
+select *
+from employees
+where dept_id in (
+				select dept_id
+				from employees 
+				group by dept_id
+				having count(*) = 1);
+
+select *
+from employees;
+
+select max(avg_sal)
+from (select dept_id,avg(salary) as avg_sal
+from employees e
+group by dept_id)
+
+
+
+
+
+
+
 
 
 
