@@ -125,4 +125,33 @@ INSERT INTO order_items (item_id, order_id, product_id, quantity, price) VALUES
 (7,106,11,1,500),
 (8,107,14,1,300);
 
+select * from customers;
+select * from orders;
+select * from order_items;
+select * from products;
 
+select c.customer_name,o.order_date
+from customers c
+join orders o on c.customer_id = o.customer_id;
+
+select c.customer_name,p.product_name,oi.quantity,oi.price
+from customers c
+join orders o on c.customer_id = o.customer_id
+join order_items oi on o.order_id = oi.order_id
+join products p on oi.product_id = p.product_id
+;
+
+select p.product_name,c.customer_name,c.city
+from customers c 
+join orders o on c.customer_id = o.customer_id
+join order_items oi on o.order_id = oi.order_id
+join products p on oi.product_id = p.product_id
+where o.order_status = 'Delivered';
+
+select * from products;
+
+select sum(oi.quantity*oi.price),c.customer_name
+from customers c
+join orders o on c.customer_id = o.customer_id
+join order_items oi on o.order_id = oi.order_id
+group by c.customer_name
