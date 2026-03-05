@@ -1,6 +1,6 @@
 select * from employee;
 select * from album;
-select * from aritst;
+select * from artist;
 select * from customer;
 select * from genre;
 select * from invoice;
@@ -34,6 +34,13 @@ select sum(total) as total_invoice,billing_city
 from invoice
 group by billing_city
 order by total_invoice desc
+limit 1;
+
+select c.first_name,c.last_name,sum(i.total) as total
+from customer c
+join invoice i on c.customer_id = i.customer_id
+group by c.first_name,c.last_name
+order by total desc
 limit 1;
 
 
